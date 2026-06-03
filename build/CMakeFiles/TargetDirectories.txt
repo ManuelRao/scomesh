@@ -1,0 +1,3 @@
+C:/Users/manum/OneDrive/Desktop/projects/LabX/build/CMakeFiles/LabX.dir
+C:/Users/manum/OneDrive/Desktop/projects/LabX/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/manum/OneDrive/Desktop/projects/LabX/build/CMakeFiles/ZERO_CHECK.dir
