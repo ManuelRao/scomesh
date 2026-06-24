@@ -1,0 +1,19 @@
+# Build directories
+build/
+out/
+bin/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# VS Code specific
+.vscode/
+
+# Compiled binaries
+*.exe
+*.dll
+*.so
+*.obj
+*.o
+*.lib
