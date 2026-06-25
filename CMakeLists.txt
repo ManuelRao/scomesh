@@ -8,5 +8,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(ScoMesh 
     src/main.cpp
     src/SumNode.cpp
+    src/GraphManager
     )
 

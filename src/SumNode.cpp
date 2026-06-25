@@ -12,6 +12,7 @@ void SumNode::Process() {
     float result = a + b;
 
     // Store the result in the output buffer
+    std::cout << "Processing SumNode: " << a << " + " << b << " = " << result << std::endl;
     outputs[0]->data = result;
     outputs[0]->isDataReady = true;
 }

@@ -1,5 +1,6 @@
 # pragma once
 #include "ScoMeshInterface.h"
+#include <iostream>
 
 class SumNode : public IScomeshNode {
     private:
