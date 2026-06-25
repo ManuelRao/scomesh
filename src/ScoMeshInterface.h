@@ -8,7 +8,8 @@
 
 enum class PinRequirement {
     Optional,
-    Required
+    Required,
+    Feedback
 };
 
 enum class PinType {
