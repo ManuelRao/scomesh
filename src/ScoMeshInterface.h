@@ -6,6 +6,19 @@
 #include <unordered_map>
 #include <variant>
 
+enum class LogSeverity {
+    Info,
+    Warning,
+    Error,
+    Fatal
+};
+
+class ILogger {
+public:
+    virtual ~ILogger() = default;
+    virtual void Log(LogSeverity severity, const std::string& msg) = 0;
+};
+
 enum class PinRequirement {
     Optional,
     Required,
@@ -86,6 +99,17 @@ struct NodeParameter { // Represents a parameter of a node, which can be exposed
 
 // 3. The Moldable Node Interface
 class IScomeshNode {
+protected:
+    // Every child node will automatically inherit this pointer
+    ILogger* logger = nullptr;
+
+    // Helper function so child nodes can just call Log(...) easily
+    void Log(LogSeverity severity, const std::string& msg) {
+        if (logger) {
+            logger->Log(severity, "[" + GetName() + "] " + msg);
+        }
+    }
+
 public:
     virtual ~IScomeshNode() = default;
 
@@ -95,6 +119,11 @@ public:
     // --- Dynamic Parameters ---
     virtual std::vector<NodeParameter*>& GetParameters() = 0;
     virtual std::vector<std::shared_ptr<DataBuffer>>& GetOutputs() = 0;
+
+    //for setting the logger from the outside, so that nodes can log messages
+    void SetLogger(ILogger* coreLogger) {
+        logger = coreLogger;
+    }
 
     // --- Execution ---
     virtual void Process() = 0; 

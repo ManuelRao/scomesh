@@ -4,12 +4,20 @@
 #include <memory>
 #include <mutex>
 #include "ScoMeshInterface.h"
+#include "Logger.h"
 
 struct Connection {
     int sourceNodeId;
     int sourcePinIndex;
     int targetNodeId;
     int targetPinIndex;
+
+    bool operator==(const Connection& other) const {
+        return sourceNodeId == other.sourceNodeId &&
+               sourcePinIndex == other.sourcePinIndex &&
+               targetNodeId == other.targetNodeId &&
+               targetPinIndex == other.targetPinIndex;
+    }
 };
 
 class GraphManager {
@@ -23,6 +31,8 @@ private:
     std::vector<int> executionOrder; // Stores the order in which nodes should be executed
     mutable std::mutex graphMutex;
 
+    ScomeshLogger logger; //The core logger instance that will be passed to nodes for logging
+
 public:
     GraphManager() = default;
     ~GraphManager() = default;
@@ -33,7 +43,7 @@ public:
     void RemoveNode(int nodeId);
     std::shared_ptr<IScomeshNode> GetNode(int nodeId);
 
-    void AddConnection(const Connection& connection);
+    bool AddConnection(const Connection& connection);
     void RemoveConnection(const Connection& connection);
     const std::vector<Connection>& GetConnections() const;
 
